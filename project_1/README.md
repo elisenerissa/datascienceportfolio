@@ -1,176 +1,99 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 1: Standardized Testing, Statistical Summaries and Inference
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 1: SAT and ACT Data Analysis 
 
-### Overview
+### Problem Statement
 
-Our first module in DSI covers:
-- basic statistics (distributions, confidence intervals, hypothesis testing)
-- many Python programming concepts
-- programmatically interacting with files and directories
-- visualizations
-- EDA
-- working with Jupyter notebooks for development and reporting
+In 2013, the College Board made a promise to transform SAT into a test that delivers opportunities to students in the United States that is affordable and accessible for all. With this, the College Board has released the redesigned SAT test in 2016. (Source: [College Board](https://www.collegeboard.org/releases/2018/more-than-2-million-students-in-class-of-2018-took-sat-highest-ever))
 
-You might wonder if you're ready to start doing data science. While you still have **tons** to learn, there are many aspects of the data science process that you're ready to tackle. Project 1 aims to allow you to practice and demonstrate these skills.
+With the new format of the SAT, the College Board is committed to ensure that more students will be able to enjoy the free learning materials and tools that are offered by SAT, as well as, scholarships and fee-waivers for low-income students. Hence, in this report, I am investigating the participation trends of different states in both SAT and ACT in  year 2017 and 2018. 
 
-For our first project, we're going to take a look at aggregate SAT and ACT scores and participation rates from each state in the United States. We'll seek to identify trends in the data and combine our data analysis with outside research to identify likely factors influencing participation rates and scores in various states.
-
-Generally speaking, you will be asked to come up with a data science problem. Here's a specific prompt that should help you craft this statement:
-> The new format for the SAT was released in March 2016. As an employee of the College Board - the organization that administers the SAT - you are a part of a team that tracks statewide participation and recommends where money is best spent to improve SAT participation rates. Your presentation and report should be geared toward **non-technical** executives with the College Board and you will use the provided data and outside research to make recommendations about how the College Board might work to increase the participation rate in a **state of your choice**.
+With the participation trends and some research done, **this report aims to identify states that have low SAT participation rate. In this report, I am limiting my scope to give recommendations to increase the participation rate of one particular state, namely Oklahoma.**
 
 ---
+
+### Content of Notebook
+
+The following outlines the content of the jupyter notebook showing the details of the analysis:
+- Data Import and Cleaning (Import data of SAT and ACT exams in 2017 and 2018)
+- Exploratory Data Analysis (Explore the data to identify interesting trends and figures )
+- Data Visualization (Visualise data to confirm trends and statistics)
+- Descriptive and Inferential Statistics
+- Outside Research
+- Conclusion and Recommendations
+
+
+---
+
+
 
 ### Datasets
 
 #### Provided Data
 
-For this project, you'll have two provided datasets:
+For this project, we are analysing the following datasets:
 
 - [2017 SAT Scores](./data/sat_2017.csv)
 - [2017 ACT Scores](./data/act_2017.csv)
+- [2018 SAT Scores](./data/sat_2018.csv)
+- [2018 ACT Scores](./data/act_2018.csv)
 
-These data give average SAT and ACT scores by state, as well as participation rates, for the graduating class of 2017.
-
-You can see the source for the SAT data [here](https://blog.collegevine.com/here-are-the-average-sat-scores-by-state/), and the source for the ACT data [here](https://www.act.org/content/dam/act/unsecured/documents/cccr2017/ACT_2017-Average_Scores_by_State.pdf). **Make sure you cross-reference your data with your data sources to eliminate any data collection or data entry issues.**
-
-#### Additional Data
-
-2018 state-by-state average results and participation for the SAT are available in PDF reports [here](https://reports.collegeboard.org/sat-suite-program-results/state-results). 2018 ACT state-by-state mean composite scores and participation rates are [here](http://www.act.org/content/dam/act/unsecured/documents/cccr2018/Average-Scores-by-State.pdf) .
-
-**This data has been compiled into CSV files which are also included in the *data* directory of this repo**
 
 ---
 
-### Deliverables
+### Data Dictionary
 
-All of your projects will comprise of a written technical report and a presentation. As we continue in the course, your technical report will grow in complexity, but for this initial project it will comprise:
-- A Jupyter notebook that describes your data with visualizations & statistical analysis.
-- A README markdown file the provides an introduction to and overview of your project.
-- Your presentation slideshow rendered as a .pdf file.
-**NOTE**: Your entire Github repository will be evaluated as your technical report. Make sure that your files and directories are named appropriately, that all necessary files are included, and that no unnecessary or incomplete files are included.
-
-For your first presentation, you'll be presenting to a **non-technical** audience. You should prepare a slideshow with appropriately scaled visuals to complement a compelling narrative. **Presentation duration will differ by market, so check with your local instructor.**
-
----
-
-### Technical Report Starter Code
-
-Future projects will require you to decide on the entire structure of your technical report. Here, we provide you with [starter code](./code/starter-code.ipynb) in a Jupyter notebook that will help to guide your data exploration and analysis. **If you choose to edit the core structure of this notebook, make sure you don't exclude any of the requested operations**.
-
----
-
-### Suggested Resources
-
-Here's a link on [how to give a good lightning talk](https://www.semrush.com/blog/16-ways-to-prepare-for-a-lightning-talk/), which provides some good recommendations for short presentations.
-
-[Here's a great summary](https://towardsdatascience.com/storytelling-with-data-a-data-visualization-guide-for-business-professionals-97d50512b407) of the main points of the book _Storytelling with Data_, which I can't recommend enough. [Here's a blog post](http://www.storytellingwithdata.com/blog/2017/8/9/my-guiding-principles) by the author about his guiding principles for visualizations.
+Refer to the table below to get a quick understanding of each variable/column. 
+|Feature|Type|Dataset|Description|
+|---|---|---|---|
+|participating_state|object|SAT/ACT|The US states that participated in SAT or ACT test| 
+|sat_participation_rate|float|SAT|The rate of participation is the number of SAT test takers over the number of graduating high school students |
+|sat_erw_score|integer|SAT|The average SAT Evidence-based Reading and Writing score in a particular state |
+|sat_math_score|integer|SAT|The average SAT Math score in a particular state|
+|sat_total_score|integer|SAT|The sum of SAT Evidence-based Reading and Writing score and SAT Math score. Here it shows average SAT total score in a particular state|
+|act_participation_rate|float|ACT|The rate of participation is the number of ACT test takers over the number of graduating high school students |
+|act_english_score|float|ACT|The average ACT English score in a particular state|
+|act_math_score|float|ACT|The average ACT Math score in a particular state|
+|act_reading_score|float|ACT|The average ACT Reading score in a particular state|
+|act_science_score|float|ACT|The average ACT Science score in a particular state|
+|act_composite_score|float|ACT|Composite score is the average of all the scores on each test (Add up English, Math, Reading and Science scores and then, divide by 4. Here it is showing the average composite score by state|
 
 ---
 
-### Submission
+### Additional data
+- [Combined 2017 SAT and ACT Scores](./data/combined_2017.csv)
+- [Combined 2018 SAT and ACT Scores](./data/combined_2018.csv)
+- [Merged 2017 and 2018 data ](./data/final.csv)
 
-**Materials must be submitted by the beginning of class on April 20.**
-
-Your technical report will be hosted on Github Enterprise. Make sure it includes:
-
-- A README.md (that isn't this file)
-- Jupyter notebook(s) with your analysis (renamed to describe your project)
-- Data files
-- Presentation slides
-- Any other necessary files (images, etc.)
-
-**Check with your local instructor for how they would like you to submit your repo for review.**
 
 ---
 
-### Presentation Structure
+### Conclusions and Recommendations
 
-- **Must be within time limit established by local instructor.**
-- Use Google Slides or some other visual aid (Keynote, Powerpoint, etc).
-- Consider the audience. Assume you are presenting to non-technical executives with the College Board (the organization that administers the SATs).
-- Start with the **data science problem**.
-- Use visuals that are appropriately scaled and interpretable.
-- Talk about your procedure/methodology (high level, **CODE IS ALWAYS INAPPROPRIATE FOR A NON-TECHNICAL AUDIENCE**).
-- Talk about your primary findings.
-- Make sure you provide **clear recommendations** that follow logically from your analyses and narrative and answer your data science problem.
+From my research, it shows that there are more states in the US that require their high school students to take ACT as compared to the number of states that has made SAT mandatory. 
 
-Be sure to rehearse and time your presentation before class.
+ACT has been made a statewide assessment since 2001 by Colorado and Illinois. Since then, many states followed suit. This has caused ACT to overtake SAT as the most popular statewide examination taken by high school students. The College Board only introduced a similar program in 2010. However, it only started to gain back its popularity in 2016 after it redesigned its exam format to be in accordance with the Common Core Standards.(Source: [PrepScholar](https://blog.prepscholar.com/which-states-require-the-act-full-list-and-advice))
 
----
+Based on the participation rate provided from the data given, the participation rate of ACT by states is higher than the participation rate of SAT by states (ACT 2018 participation mean: 61.6% vs SAT 2018 participation mean: 45.7%). However, as mentioned earlier, this is not an accurate representation of the total population (the number of people who actually took the test) as there is a huge population size difference in each state. According to [US.News](https://www.usnews.com/education/best-colleges/articles/act-vs-sat-how-to-decide-which-test-to-take), there were 2.1 million test-takers who completed SAT and 1.9 million students took the ACT. Even though there might be some overlap as some students might have taken both. 
 
-### Rubric
-Your local instructor will evaluate your project (for the most part) using the following criteria.  You should make sure that you consider and/or follow most if not all of the considerations/recommendations outlined below **while** working through your project.
+As part of the College Board, I would definitely like to increase the participation rate of SAT further. It seems that there are a few reasons that would make SAT more attractive than ACT.
+1. The learning experience that SAT offers - students have access to materials on Khan Academy which includes video lessons and personalized resources based on their test results. For students who have been taking PSAT since the 8th or 9th grade, the personalized resources will prepare them early for the SAT examination which will be submitted for college entry. 
+2. It connects students to scholarship opportunities as The National Merit Scholarship program uses PSAT/NMSQT (The test offered by College Board) to identify candidates 
+3. The College Board also offers Advanced Placement (AP) Program which will expose high school students to college-level courses and at the same time, they can earn college credits. As AP is offered by the College Board, the SAT suite of assessment will be able to help schools to identify students with potential to succeed in certain AP Courses and Exams. 
+4. College Application Fee waivers for income-eligible SAT takers
+(Source: [College Board](https://collegereadiness.collegeboard.org/about/benefits))
 
-**Scores will be out of 21 points based on the 7 items in the rubric.** <br>
-*3 points per section*<br>
 
-| Score | Interpretation |
-| --- | --- |
-| **0** | *Project fails to meet the minimum requirements for this item.* |
-| **1** | *Project meets the minimum requirements for this item, but falls significantly short of portfolio-ready expectations.* |
-| **2** | *Project exceeds the minimum requirements for this item, but falls short of portfolio-ready expectations.* |
-| **3** | *Project meets or exceeds portfolio-ready expectations; demonstrates a thorough understanding of every outlined consideration.* |
+I would like to choose Oklahoma as an example. It has a low SAT participation rate of 8% in 2018 and 100% ACT Participation rate in 2018. The Oklahoma state requires the school to offer a single college-or-career-readiness exam but it is up to the schools to decide on which exam to choose. This means that The Oklahoma State Department of Education provides funding for every public school junior to take either the ACT or SAT for free. Even though most high schools in Oklahoma has chosen ACT over SAT, Oklahoma's two biggest schools have chosen to offer SAT instead. There are a total of 10 districts that have selected SAT over ACT. 
 
-**Project Organization**
-- Are modules imported correctly (using appropriate aliases)?
-- Are data imported/saved using relative paths?
-- Does the README provide a good executive summary of the project?
-- Is markdown formatting used appropriately to structure notebooks?
-- Are there an appropriate amount of comments to support the code?
-- Are files & directories organized correctly?
-- Are there unnecessary files included?
-- Do files and directories have well-structured, appropriate, consistent names?
+With these factors in mind, it seems that the high schools will be the deciding factor on the participation rate in this state. As the redesigning of SAT exams and benefits are relatively new, I think that **the College Board needs to raise awareness by the following methods:**
 
-**Clarity of Message**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the project?
-- Does the student provide appropriate context to connect individual steps back to the overall project?
-- Is it clear how the final recommendations were reached?
-- Are the conclusions/recommendations clearly stated?
+1. Approach high schools directly to have a discussion on getting them onboard in making SAT Test mandatory for their schools
 
-**Python Syntax and Control Flow**
-- Is care taken to write human readable code?
-- Is the code syntactically correct (no runtime errors)?
-- Does the code generate desired results (logically correct)?
-- Does the code follows general best practices and style guidelines?
-- Are Pandas functions used appropriately?
-- Does the student demonstrate mastery masking in Pandas?
-- Does the student demonstrate mastery sorting in Pandas?
+2. Assuring parents, students and high schools that ACT scores are not preferred over SAT scores in Oklahama colleges admission
 
-**Data Cleaning and EDA**
-- Does the student fix data entry issues?
-- Are data appropriately labeled?
-- Are data appropriately typed?
-- Are datasets combined correctly?
-- Are appropriate summary statistics provided?
-- Are steps taken during data cleaning and EDA framed appropriately?
+3. The college board can also conduct free workshops in schools to demonstrate the learning experience that each student can get if they are to participate in SAT exams while raising awareness on the other benefits such as advance placement programme that will give them an advantage during college applications, scholarship programmes as well as college application fee-waiver for eligible students
 
-**Visualizations**
-- Are the requested visualizations provided?
-- Do plots accurately demonstrate valid relationships?
-- Are plots labeled properly?
-- Plots interpreted appropriately?
-- Are plots formatted and scaled appropriately for inclusion in a notebook-based technical report?
+4. Running social media campaign (Facebook and Instagram) targeting the right age group in Oklahama which will allow the students to get sample materials or sample personalized assessment.
 
-**Research and Conceptual Understanding**
-- Were useful insights gathered from outside sources?
-- Are sources clearly identified?
-- Does the student provide appropriate interpretation with regards to descriptive and inferential statistics?
+5. Lastly, I think the college board should also approach the local State Board of Education to pitch the benefits of the newly revamped SAT programmes and benefits.
 
-**Presentation**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the presentation building toward a final conclusion?
-- Are the conclusions/recommendations clearly stated?
-- Is the level of technicality appropriate for the intended audience?
-- Is the student substantially over or under time?
-- Does the student appropriately pace their presentation?
-- Does the student deliver their message with clarity and volume?
-- Are appropriate visualizations generated for the intended audience?
-- Are visualizations necessary and useful for supporting conclusions/explaining findings?
-
-In order to pass the project, students must earn a minimum score of 1 for each category.
-- Earning below a 1 in one or more of the above categories would result in a failing project.
-- While a minimum of 1 in each category is the required threshold for graduation, students should aim to earn at least an average of 1.5 across each category. An average score below 1.5, while it may be passing, means students may want to solicit specific feedback in order to significantly improve the project before showcasing it as part of a portfolio or the job search.
-
-### REMEMBER:
-
-This is a learning environment and you are encouraged to try new things, even if they don't work out as well as you planned! While this rubric outlines what we look for in a _good_ project, it is up to you to go above and beyond to create a _great_ project. **Learn from your failures and you'll be prepared to succeed in the workforce**.
+We will continue to review this strategy and if it turns out to be successful, we will be able to apply this strategy to the other states that have yet to impose ACT as the mandatory statewide examination.

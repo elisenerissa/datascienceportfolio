@@ -1,177 +1,190 @@
 # Project 2 - Ames Housing Data and Kaggle Challenge
 
-Welcome to Project 2! It's time to start modeling.
 
-**Primary Learning Objectives:**
-1. Creating and iteratively refining a regression model
-2. Using [Kaggle](https://www.kaggle.com/) to practice the modeling process
-3. Providing business insights through reporting and presentation.
 
-You are tasked with creating a regression model based on the Ames Housing Dataset. This model will predict the price of a house at sale.
+## Context and Scope
 
-The Ames Housing Dataset is an exceptionally detailed and robust dataset with over 70 columns of different features relating to houses.
+This data-science research and finding is conducted for **a group of stakeholders in a real estate company** who would like to find out the factors that affect the house prices in Ames so that they are able to:
+1. **Estimate a good selling price** for sellers based on the features of the house
+2. **Advise sellers on how to improve/modify** their houses to fetch better prices in the market
+3. **Advise buyers on the things to look out** for while buying a house (neighborhod, home features/qualities)
 
-Secondly, we are hosting a competition on Kaggle to give you the opportunity to practice the following skills:
 
-- Refining models over time
-- Use of train-test split, cross-validation, and data with unknown values for the target to simulate the modeling process
-- The use of Kaggle as a place to practice data science
 
-As always, you will be submitting a technical report and a presentation. **You may find that the best model for Kaggle is not the best model to address your data science problem.**
+## Problem Statement
 
-## Set-up
+We want to find the factors that affect house pricing in Ames, Iowa. Inituitively, based on property trend, we know that neighbourhood and the size of the house affect property prices. So at the end of this report, we should be able to answer the following questions.
+1. Do neighbourhood and the size of the house affect property prices in Ames?
+2. What are the other important factors that will help to boost the property prices in Ames?
+3. What are the factors that will hurt the price of a house in Ames? 
 
-Before you begin working on this project, please do the following:
-
-1. Sign up for an account on [Kaggle](https://www.kaggle.com/)
-2. **IMPORTANT**: Click this link ([Regression Challenge Sign Up](https://www.kaggle.com/t/cf68f4a276f44b59a3c6c843dbf9ed1e)) to **join** the competition (otherwise you will not be able to make submissions!)
-3. Review the material on the [DSI-US-6 Regression Challenge](https://www.kaggle.com/c/dsi-us-6-project-2-regression-challenge)
-4. Review the [data description](http://jse.amstat.org/v19n3/decock/DataDocumentation.txt).
-
-## The Modeling Process
-
-1. The train dataset has all of the columns that you will need to generate and refine your models. The test dataset has all of those columns except for the target that you are trying to predict in your Regression model.
-2. Generate your regression model using the training data. We expect that within this process, you'll be making use of:
-    - train-test split
-    - cross-validation / grid searching for hyperparameters
-    - strong exploratory data analysis to question correlation and relationship across predictive variables
-    - code that reproducibly and consistently applies feature transformation (such as the preprocessing library)
-3. Predict the values for your target column in the test dataset and submit your predictions to Kaggle to see how your model does against unknown data.
-    - **Note**: Kaggle expects to see your submissions in a specific format. Check the challenge's page to make sure you are formatting your CSVs correctly!
-    - **You are limited to models you've learned in class**. In other words, you cannot use XGBoost, Neural Networks or any other advanced model for this project.
-4. Evaluate your models!
-    - consider your evaluation metrics
-    - consider your baseline score
-    - how can your model be used for inference?
-    - why do you believe your model will generalize to new data?
-
-## Submission
-
-**Materials must be submitted by the beginning of class on May 4th.**
-
-Your technical report will be hosted on Github Enterprise. Make sure it includes:
-
-- A README.md (that isn't this file)
-- Jupyter notebook(s) with your analysis and models (renamed to describe your project)
-- At least one successful prediction submission on [DSI-US-6 Regression Challenge](https://www.kaggle.com/c/dsi-us-6-project-2-regression-challenge) --  you should see your name in the "[Leaderboard](https://www.kaggle.com/c/dsi-us-6-project-2-regression-challenge/leaderboard)" tab.
-- Data files
-- Presentation slides
-- Any other necessary files (images, etc.)
-
-**Check with your local instructor for how they would like you to submit your repo for review.**
 
 ---
 
-## Presentation Structure
+## Content of Notebook
 
-- **Must be within time limit established by local instructor.**
-- Use Google Slides or some other visual aid (Keynote, Powerpoint, etc).
-- Consider the audience. **Check with your local instructor for direction**.
-- Start with the **data science problem**.
-- Use visuals that are appropriately scaled and interpretable.
-- Talk about your procedure/methodology (high level).
-- Talk about your primary findings.
-- Make sure you provide **clear recommendations** that follow logically from your analyses and narrative and answer your data science problem.
+- [Train data](./datasets/train.csv)
+    - [Data Import & Cleaning](#Data-Import-and-Cleaning)
+    - [Exploratory Data Analysis & Data Visualization](#Exploratory-Data-Analysis-and-Visualizations)
+    - [Pre-processing](#Pre-processing)
+    - [Modeling](#Train-Modelling)
+- [Test data](./datasets/train.csv)
+    - [Data Import and Cleaning](#Test-Data-Import-and-Cleaning)
+    - [Pre-processing](#Pre-processing)
+    - [Kaggle Submission](#Predictions-and-Kaggle-Submission)
+- [Inferential Visualizations](#Inferential-Visualizations)
+- [Conclusion](#Conclusion)
+- [Business Recommendations](#Business-Recommendations)
+- [Future Steps](#Future-Steps)
 
-Be sure to rehearse and time your presentation before class.
+
+
+## Datasets
+
+#### Provided Data
+
+For this project, we are analysing the following datasets:
+
+- [Train Data](./datasets/train.csv)
+- [Test Data](./datasets/test.csv)
+
+
+#### Kaggle Submission
+
+- [Kaggle Submission](./datasets/kaggle_submission.csv)
+
+
+## Data Dictionary 
+
+
+### Discrete Variables
+|Feature|Column Name|Type|Description|
+|---|---|---|---|
+|**Order**|id|*discrete*|Observation Number| 
+|**Year Built**|year_built|*discrete*|Original construction date|
+|**Year Remod/Add**|year_remod/add|*discrete*|Remodel date (same as construction date if no remodeling or additions)|
+|**Basement Full Bathrooms**|bsmt_full_bath|*discrete*|Number of full bathrooms at the basement|
+|**Basement Half Bathrooms**|bsmt_half_bath|*discrete*|Number of half bathrooms at the basement|
+|**Full Bathrooms**|full_bath|*discrete*|Number of full bathrooms above grade|
+|**Half Bathrooms**|half_bath|*discrete*|Number of half bathrooms above grade|
+|**Bedroom**|bedroom_abvgr|*discrete*|Number of bedrooms above grade (does not include basement bedrooms|
+|**Kitchen**|kitchen_abvgr|*discrete*|Number of ktchens above grade |
+|**Total Rooms above grade**|totrms_abvgrd|*discrete*|Number of total rooms above grade (does not include bathrooms |
+|**Fireplaces**|fireplaces|*discrete*|Number of fireplaces|
+|**Garage Year Built**|garage_yr_blt|*discrete*|Year garage was built (YYYY)|
+|**Garage Cars**|garage_cars|*discrete*|Size of garage in car capacity|
+|**Month Sold**|mo_sold|*discrete*|Month Sold (MM)|
+|**Year Sold**|yr_sold|*discrete*|Year Sold(YYYY)|
+
+### Continous Variables
+|Feature|Column Name|Type|Description|
+|---|---|---|---|
+|**Lot Frontage**|lot_frontage|*continuous*|Linear feet of street connected to property| 
+|**Lot Area**|lot_area|*continuous*|Lot size in square feet| 
+|**Masonry Veneer Area**|mas_vnr_area|*continuous*|Masonry veneer area in square feet| 
+|**Basement Finish SF 1**|bsmtfin_sf_1|*continuous*|Type 1 finished square feet| 
+|**Basement Finish SF 2**|bsmtfin_sf_2|*continuous*|Type 2 finished square feet| 
+|**Basement Unfinished SF**|bsmtfin_unf_sf|*continuous*|Unfinished square feet of basement area| 
+|**Total Basement SF**|total_bsmt_sf|*continuous*|Total square feet of basement area|
+|**1st Floor SF**|1st_flr_sf|*continuous*|First Floor square feet|
+|**2nd Floor SF**|2nd_flr_sf|*continuous*|Second Floor square feet|
+|**Low Quality Finish SF**|low_qual_fin_sf|*continuous*|Low quality finished suqare feet (all floors|
+|**Gr Liv Area**|gr_liv_area|*continuous*|Above grade (ground) living area square feet|
+|**Garage Area**|garage_area|*continuous*|Size of garage in square feet|
+|**Wood Deck SF**|wood_deck_sf|*continuous*|Wood deck area in square feet|
+|**Open Porch SF**|open_porch_sf|*continuous*|Open porch area in square feet|
+|**Enclosed Porch**|enclosed_porch|*continuous*|Enclosed Porch area in square feet|
+|**3-Ssn Porch**|3ssn_porch|*continuous*|Three season porch area in square feet|
+|**Screen Porch**|screen_porch|*continuous*|Screen porch area in square feet|
+|**Pool Area**|pool_area|*continuous*|Pool area in square feet|
+|**Misc Val**|misc_val|*continuous*|Value of miscellaneous feature|
+|**SalePrice**|saleprice|*continuous*|Sale Price $$|
+
+### Ordinal Variables
+
+|Feature|Column Name| Variable Type|Description|Values Description|
+|---|---|---|---|---|
+|**Lot Shape**|lot_shape|*ordinal*|General shape of property|**Reg** - Regular, **IR1**- Slightly irregular, **IR2**-  Moderately Irregular, **IR3** - Irregular|
+|**Utilities**|utilities|*ordinal*|Type of utilities available|**AllPub** - All public Utilities (E,G,W,& S), **NoSewr**- Electricity, Gas, and Water (Septic Tank), **NoSeWa**- Electricity and Gas Only, **ELO** - Electricity only|
+|**Land Slope**|land_slope|*ordinal*|Slope of property|**Gtl** - Gentle Slope, **Mod**- Moderate Slope, **Sev**- Severe Slope|
+|**Overall quality**|overall_qual|*ordinal*|Rates the overall material and finish of the house|**Very Excellent, Excellent, Very Good, Good, Above Average, Average, Below Average, Fair, Poor, Very Poor** (Scale 10 to 1)|
+|**Overall Condition**|overall_cond|*ordinal*|Rates the overall condition of the house|**Very Excellent, Excellent, Very Good, Good, Above Average, Average, Below Average, Fair, Poor, Very Poor** (Scale 10 to 1)|
+|**External Quality**|exter_qual|*ordinal*|Evaluates the quality of the material on the exterior|**Ex** - Excellent, **Gd**- Good, **TA**- Average/Typical, **Fa**- Fair, **Po**- Poor|
+|**External Condition**|exter_cond|*ordinal*|Evaluates the present condition of the material on the exterior|**Ex** - Excellent, **Gd**- Good, **TA**- Average/Typical, **Fa**- Fair, **Po**- Poor|
+|**Basement Quality**|bsmt_qual|*ordinal*|Evaluates the height of the basement|**Ex** - Excellent, **Gd**- Good, **TA**- Average/Typical, **Fa**- Fair, **Po**- Poor,**NA**- No Basement|
+|**Basement Condition**|bsmt_cond|*ordinal*|Evaluates the general condition of the basement|**Ex** - Excellent, **Gd**- Good, **TA**- Average/Typical, **Fa**- Fair, **Po**- Poor,**NA**- No Basement|
+|**Basement Exposure**|bsmt_exposure|*ordinal*|Refers to the walkout or garden level walls|**Gd**- Good Exposure, **Av**- Average Exposure, **Mn**- Minimum Exposure, **No**- No Exposure,**NA**- No Basement|
+|**Basement Finish Type 1**|bsmtfin_type_1|*ordinal*|Rating of basement finished area|**GLQ**- Good Living Quarters, **ALQ**- Average Living Quarters, **BLQ**- Below Average Living Quarters, **Rec**- Average Rec Room,**LwQ**- Low Quality, **Unf**- Unfinished, **NA**- No Basement|
+|**Basement Finish Type 2**|bsmtfin_type_2|*ordinal*|Rating of basement finished area(if multople types)|**GLQ**- Good Living Quarters, **ALQ**- Average Living Quarters, **BLQ**- Below Average Living Quarters, **Rec**- Average Rec Room,**LwQ**- Low Quality, **Unf**- Unfinished, **NA**- No Basement|
+|**Heating QC**|heating_qc|*ordinal*|Heating quality and condition|**Ex** - Excellent, **Gd**- Good, **TA**- Average/Typical, **Fa**- Fair, **Po**- Poor|
+|**Electrical**|electrical|*ordinal*|Electrical system|**SBrkr** - Standard Circuit Breakers & Romex, **FuseA**- Fuse Box over 60 AMP and all Romex wiring (Average), **FuseF**- 60 AMP Fuse Box and mostly Romex wiring (Fair), **FuseP**- 60 AMP Fuse Box and mostly knob & tube wiring (poor), **Mix**- Mixed|
+|**Kitchen Quality**|kitchen_qual|*ordinal*|Quality of kitchen|**Ex** - Excellent, **Gd**- Good, **TA**- Average/Typical, **Fa**- Fair, **Po**- Poor|
+|**Functional**|functional|*ordinal*|Home functionality (Assume typical unless deductions are warranted)|**Typ** - Typical Functionality, **Min1**- Minor Deductions 1, **Min2**- Minor Deductions 2, **Mod**- Moderate Deductions, **Maj1**- Major Deductions 1,**Maj2**- Major Deductions 2,**Sev**- Severely Damaged, **Sal**- Salvage only|
+|**Fireplace Quality**|fireplace_qual|*ordinal*|Quality of fireplace|**Ex** - Excellent, **Gd**- Good, **TA**- Average/Typical, **Fa**- Fair, **Po**- Poor, **NA**- No fireplace|
+|**Garage Finish**|garage_finish|*ordinal*|Interior finish of the garage|**Fin** - Finished, **RFn**- Rough Finished, **Unf**- Unfinished, **NA**- No garage|
+|**Garage Quality**|garage_qual|*ordinal*|Quality of garage|**Ex** - Excellent, **Gd**- Good, **TA**- Average/Typical, **Fa**- Fair, **Po**- Poor, **NA**- No garage|
+|**Garage Condition**|garage_cond|*ordinal*|Quality of garage|**Ex** - Excellent, **Gd**- Good, **TA**- Average/Typical, **Fa**- Fair, **Po**- Poor, **NA**- No garage|
+|**Paved Drive**|paved_drive|*ordinal*|Paved driveway|**Y** - Paved, **P**- Partial Pavement, **N**- Dirt/Gravel|
+|**Pool QC**|pool_qc|*ordinal*|Pool Quality|**Ex** - Excellent, **Gd**- Good, **TA**- Average/Typical, **Fa**- Fair, **Po**- Poor, **NA**- No pool|
+|**Fence**|fence|*ordinal*|Fence quality|**GdPrv** - Good Privacy, **MnPrv**- Minimum Privacy, **GdWo**- Good Wood, **MnWw**- Minimum Wood/Wire, **NA**- No fence|
+
+### Nominal Variables
+
+|Feature|Column Name|Type|Description|
+|---|---|---|---|
+|**PID**|pid|*nominal*|Parcel identification number| 
+|**Ms Subclass**|ms_subclass|*nominal*|Identifies the type of dwelling involved in the sale|
+|**Ms Zoning**|ms_zoning|*nominal*|Identifies the general zoning classification of the sale|
+|**Street**|street|*nominal*|Type of road access to property|
+|**Alley**|alley|*nominal*|Type of alley access to property|
+|**Land Contour**|land_contour|*nominal*|Flatness of the property|
+|**Lot Configuration**|lot_config|*nominal*|Lot Configuration|
+|**Neighborhood**|neighborhood|*nominal*|Physical locations within Ames city limits(map available)|
+|**Condition 1**|condition_1|*nominal*|Proximisty to various conditions|
+|**Condition 2**|condition_2|*nominal*|Proximisty to various conditions(if more than one is present)|
+|**Building Type**|bldg_type|*nominal*|Type of dwelling|
+|**House Style**|house_style|*nominal*|Style of dwelling|
+|**Roof Style**|roof_style|*nominal*|Type of roof|
+|**Roof Material**|roof_matl|*nominal*|Roof Material|
+|**Exterior 1**|exterior_1st|*nominal*|Exterior covering on house|
+|**Exterior 2**|exterior_2nd|*nominal*|Exterior covering on house(if more than one materials|
+|**Masonry Vaneer Type**|mas_vnr_type|*nominal*|Masonry Veneer Type|
+|**Foundation**|foundation|*nominal*|Type of foundation|
+|**Heating**|heating|*nominal*|Type of Heating|
+|**Central Air**|central_air|*nominal*|Central Air Conditioning|
+|**Garage Type**|garage_type|*nominal*|Garage Location|
+|**Miscellaneous Feature**|misc_feature|*nominal*|Miscellaneous feature not covered in other categories|
+|**Sale Type**|sale_type|*nominal*|Type of sale|
 
 ---
 
-## Rubric
-Your local instructor will evaluate your project (for the most part) using the following criteria.  You should make sure that you consider and/or follow most if not all of the considerations/recommendations outlined below **while** working through your project.
+## Business Recommendations
 
-**Scores will be out of 27 points based on the 9 items in the rubric.** <br>
-*3 points per section*<br>
+We wanted to know the factors that actually affect the housing price in Ames. Intuitively, in most places, we all know that **the size of the house and the price of the land that is determined by the neighbourhood will affect house prices.** This "known fact" has proven to be true in Ames as well. In fact, the living area **the strongest factor that will affect the price of the house.** The neighbourhood also does affect the house prices in Ames. 
 
-| Score | Interpretation |
-| --- | --- |
-| **0** | *Project fails to meet the minimum requirements for this item.* |
-| **1** | *Project meets the minimum requirements for this item, but falls significantly short of portfolio-ready expectations.* |
-| **2** | *Project exceeds the minimum requirements for this item, but falls short of portfolio-ready expectations.* |
-| **3** | *Project meets or exceeds portfolio-ready expectations; demonstrates a thorough understanding of every outlined consideration.* |
+We also know from the model which neighbourhood has the highest property value. It seems like **houses located at Northridge Heights and Stone Brook seem to be valued a lot higher.** In contrary, being located **at Northwest Ames seems to lower the value of the house.**
 
-### The Data Science Process
+**Other important factors that boost home prices besides obvious factors such as size of living area, overall home quality and age of the house are:**
+1. Masonry veneer made of brick face or stone 
+2. Having a big basement
+3. Big garage with a good interior finish of the garage (Detached garage is also an added bonus)
+4. Good neighborhood: Northridge Heights and Stone Brook 
+   - It seems that Northridge Heights and Stone Brook estate are near to Gilbert School District which is top school in Iowa (Source: [Ames Tribune](https://www.amestrib.com/news/20200121/gilbert-and-ames-ranked-as-top-school-districts-in-iowa))
+   
+5. Fireplace quality 
+> It also seems like people in the United States still feel that fireplaces bring luxurious feel to a house. The National Association of Realtors conducted a 2013 survey of homeowners’ desire for a fireplace. Participants listed fireplaces as one of their most sought-after features, with **40 percent stating that they would pay extra** if the home had one(Source: [Angie's List](https://www.angieslist.com/articles/do-fireplaces-make-your-home-value-hot.htm))
 
-**Problem Statement**
-- Is it clear what the student plans to do?
-- What type of model will be developed?
-- How will success be evaluated?
-- Is the scope of the project appropriate?
-- Is it clear who cares about this or why this is important to investigate?
-- Does the student consider the audience and the primary and secondary stakeholders?
 
-**Data Cleaning and EDA**
-- Are missing values imputed appropriately?
-- Are distributions examined and described?
-- Are outliers identified and addressed?
-- Are appropriate summary statistics provided?
-- Are steps taken during data cleaning and EDA framed appropriately?
-- Does the student address whether or not they are likely to be able to answer their problem statement with the provided data given what they've discovered during EDA?
+**Neighborhood that will devalue the houseprices are:** 
+Northwest Ames, Somerset, Old Town and North Ames
 
-**Preprocessing and Modeling**
-- Are categorical variables one-hot encoded?
-- Does the student investigate or manufacture features with linear relationships to the target?
-- Have the data been scaled appropriately?
-- Does the student properly split and/or sample the data for validation/training purposes?
-- Does the student utilize feature selection to remove noisy or multi-collinear features?
-- Does the student test and evaluate a variety of models to identify a production algorithm (**AT MINIMUM:** linear regression, lasso, and ridge)?
-- Does the student defend their choice of production model relevant to the data at hand and the problem?
-- Does the student explain how the model works and evaluate its performance successes/downfalls?
+## Future Steps
 
-**Evaluation and Conceptual Understanding**
-- Does the student accurately identify and explain the baseline score?
-- Does the student select and use metrics relevant to the problem objective?
-- Is more than one metric utilized in order to better assess performance?
-- Does the student interpret the results of their model for purposes of inference?
-- Is domain knowledge demonstrated when interpreting results?
-- Does the student provide appropriate interpretation with regards to descriptive and inferential statistics?
+This model will do reasonably well in estimating home prices in Ames (in the context of advising home sellers on deciding on homeprices). It also gave us valuable insights in terms of the factors that will affect home prices in Ames. Hence, I would think that this model has largely addressed our business problems. 
 
-**Conclusion and Recommendations**
-- Does the student provide appropriate context to connect individual steps back to the overall project?
-- Is it clear how the final recommendations were reached?
-- Are the conclusions/recommendations clearly stated?
-- Does the conclusion answer the original problem statement?
-- Does the student address how findings of this research can be applied for the benefit of stakeholders?
-- Are future steps to move the project forward identified?
+However, as mentioned earlier, it definitely can be improved **given more time and data.** Some features in the model do seem redundant. Some features seem to be affecting the accuracy of the model. If I am given more time to improve this model, I would **consider removing building type, land contour, masonry veneer type from my model** until we are able to collect more conclusive samples that gives more information on how these features will affect home prices. I would also consider **making some changes to how total rooms above grade is being "fed" into the model.** From the **feature coefficient of the model, it shows that the number of rooms affect the house price negatively.** This does not really make sense. Hence, as mentioned in the inferential statistics section above, I would consider imputing the observations above 8 rooms differently.
 
-### Organization and Professionalism
+All in all, there is definitely a lot of improvements that can be done to this model. However, this model is able to provide the stakeholders (in this context) a good answer to the business problems.
 
-**Project Organization**
-- Are modules imported correctly (using appropriate aliases)?
-- Are data imported/saved using relative paths?
-- Does the README provide a good executive summary of the project?
-- Is markdown formatting used appropriately to structure notebooks?
-- Are there an appropriate amount of comments to support the code?
-- Are files & directories organized correctly?
-- Are there unnecessary files included?
-- Do files and directories have well-structured, appropriate, consistent names?
+I do not think that **this model can be used to predict other cities accurately as house prices vary vastly across different cities in United States and globally** depending on the land prices and the standard of living of each city. However, there are insights that will be applicable to other cities in the United States. For example, as seen in the model and various sources, we know that **having a finished basement and having a fireplace with good quality** will generally increase the value of the property in the US. (Source: [The balance SMB](https://www.thebalancesmb.com/pros-of-finishing-a-basement-for-property-investors-2124861) and [Angie's List](https://www.angieslist.com/articles/do-fireplaces-make-your-home-value-hot.htm))
 
-**Visualizations**
-- Are sufficient visualizations provided?
-- Do plots accurately demonstrate valid relationships?
-- Are plots labeled properly?
-- Are plots interpreted appropriately?
-- Are plots formatted and scaled appropriately for inclusion in a notebook-based technical report?
-
-**Python Syntax and Control Flow**
-- Is care taken to write human readable code?
-- Is the code syntactically correct (no runtime errors)?
-- Does the code generate desired results (logically correct)?
-- Does the code follows general best practices and style guidelines?
-- Are Pandas functions used appropriately?
-- Are `sklearn` methods used appropriately?
-
-**Presentation**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the presentation building toward a final conclusion?
-- Are the conclusions/recommendations clearly stated?
-- Is the level of technicality appropriate for the intended audience?
-- Is the student substantially over or under time?
-- Does the student appropriately pace their presentation?
-- Does the student deliver their message with clarity and volume?
-- Are appropriate visualizations generated for the intended audience?
-- Are visualizations necessary and useful for supporting conclusions/explaining findings?
-
-### REMEMBER:
-
-This is a learning environment and you are encouraged to try new things, even if they end up failing. While this rubric outlines what we look for in a _good_ project, it is up to you to go above and beyond to create a _great_ project. **Learn from your failures and you'll be prepared to succeed in the workforce**.
