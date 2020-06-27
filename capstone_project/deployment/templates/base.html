@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title>Predict the sentiment!</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+
+
+
+  <form action="/predict-review" method="POST">
+
+    <ul>
+      <li><a>Features Extraction and Sentiment Analyser</a></li>
+    </ul>
+
+  <div class="container">
+    <p>This tool is able to extract important features from cellphone reviews and predict the sentiment of each feature. Type your own review to try it.</p><br>
+    <h1>Type Review here:</h1><br>
+    <textarea type="text" name="reviews" rows="20" cols="75"> </textarea>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+   <button id="submit">Submit</button>
+   <br><br><br>
+
+
+   {% if output %}
+   <h2>Predicted Feature and Sentiment:</h2><br>
+     {% for key, value in output.items() %}
+       <button id="predictions"> {{key}}
+         <!-- Add icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+         {% for number in range(value) %}
+           <span class="fa fa-star checked"></span>
+           {% endfor %}
+
+       </button>
+
+       {% endfor %}
+   {% endif %}
+
+  </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+  background-color: #f0f0f0;
+}
+
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding-top: 20px;
+  overflow: hidden;
+  background-color: #276791;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  font: 45px 'Opens Sans', sans-serif;
+  text-align: center;
+  padding: 25px 500px;
+  text-decoration: none;
+}
+
+
+
+h1 {
+  width: 300px;
+  margin: auto 0;
+  padding-top:30px;
+  border: none;
+  color: #444;
+  font: 20px 'Opens Sans', sans-serif;
+  letter-spacing: 0px;
+  appearance: none;
+  cursor: pointer;
+}
+
+h2 {
+  width: 400px;
+  margin: auto 0;
+  padding: 5px;
+  border: none;
+  color: #444;
+  font: 20px 'Opens Sans', sans-serif;
+  letter-spacing: 1px;
+  appearance: none;
+  cursor: pointer;
+}
+
+p{
+  padding-top:20px;
+  line-height: 1cm;
+  color: #2b3e51;
+  font: 20px 'Opens Sans', sans-serif;
+}
+
+.container, .textarea {
+  width: 650px;
+  height: 180px;
+}
+
+
+
+
+.container {
+  display: block;
+  margin: 0 auto;
+  transform: translateZ(0);
+  -webkit-text-size-adjust: none;
+}
+
+
+textarea {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  border: 2px solid #276791;
+  border-radius: 0;
+  color: #444;
+  background-color: transparent;
+  overflow: auto;
+  resize: none;
+  transition: transform 1s;
+}
+
+
+#submit {
+  display: block;
+  width: 150px;
+  margin: auto 0;
+  padding: 5px;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  background-color: #276791;
+  font: 18px 'Opens Sans', sans-serif;
+  letter-spacing: 1px;
+  appearance: none;
+  cursor: pointer;
+}
+
+#predictions {
+  display: block;
+  width: 300px;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 10px;
+  border-radius: 6px;
+  color: #fff;
+  background-color: #276791;
+  font: 18px 'Opens Sans', sans-serif;
+  letter-spacing: 1px;
+  appearance: none;
+  cursor: pointer;
+}
+
+textarea:focus, button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #c6aada;
+}
+
+
+.checked {
+  color: orange;
+}
