@@ -30,32 +30,32 @@ The scope of this project would be to improve user interface and platform experi
 
 **1. Data**
 - [Amazon Cell Phone Data](./data/amazon_items_v2.csv)
-- [Amazon Reviews](../data/amazon_cells_v2.csv)
-- [Cleaned Data](../data/cleaned_combined_data.csv)
-- [Cleaned Data with an additional keywords columns](../data/cleaned_combined_data_with_keywords.csv)
-- [Cleaned Data merged with Features and Sentiments output](../data/reviews_with_feature_sentiments.csv)
-- [Best Topic Model](../data/best_topic_model_v2.pkl)
-- [Data processed for topic modelling](../data/data_ready_v2)
-- [Finetuned BERT Model](https://drive.google.com/file/d/1V9NqDJW0goegB9D3HZ0lcEJFiB3X24ai/view?usp=sharing)
+- [Amazon Reviews](./data/amazon_cells_v2.csv)
+- [Cleaned Data](./data/cleaned_combined_data.csv)
+- [Cleaned Data with an additional keywords columns](./data/cleaned_combined_data_with_keywords.csv)
+- [Cleaned Data merged with Features and Sentiments output](./data/reviews_with_feature_sentiments.csv)
+- [Best Topic Model](./data/best_topic_model_v2.pkl)
+- [Data processed for topic modelling](./data/data_ready_v2)
+- [Finetuned BERT Model](https://drive.google.com/file/d/1V9NqDJW0goegB9D3HZ0lcEJFiB3X24ai/view?usp=sharing)  
 This file is stored in google drive as the file size is too big to be pushed to github
-- [Logistic Regression Model](../data/logreg_3classes.pkl)
-- [Helpful Reviews for accuracy evaluation](../data/helpful_reviews.csv)
-- [Evaluated Helpful Reviews](../data/evaluated_helpful_reviews.csv)
+- [Logistic Regression Model](./data/logreg_3classes.pkl)
+- [Helpful Reviews for accuracy evaluation](./data/helpful_reviews.csv)
+- [Evaluated Helpful Reviews](./data/evaluated_helpful_reviews.csv)
 
 **2. notebooks**
-- [Data Cleaning and EDA](../notebooks/1_data_cleaning_and_eda.ipynb)
-- [Topic Modelling](../notebooks/2_topic_modelling.ipynb)
-- [Topics Analysis and Visualisations](../notebooks/3_topic_analysis_and_visusalizations.ipynb)
-- [Feature Extractions and Sentiment Analysis](../notebooks/4_feature_extractions_and_sentiment_analysis.ipynb)
-- [Fine-tuning of BERT](../notebooks/5_fine_tuning_of_BERT.ipynb)
-- [Findings and Conclusions](../notebooks/6_comparisons_of_sentiment_analysis_results.ipynb)
+- [Data Cleaning and EDA](./notebooks/1_data_cleaning_and_eda.ipynb)
+- [Topic Modelling](./notebooks/2_topic_modelling.ipynb)
+- [Topics Analysis and Visualisations](./notebooks/3_topic_analysis_and_visusalizations.ipynb)
+- [Feature Extractions and Sentiment Analysis](./notebooks/4_feature_extractions_and_sentiment_analysis.ipynb)
+- [Fine-tuning of BERT](./notebooks/5_fine_tuning_of_BERT.ipynb)
+- [Findings and Conclusions](./notebooks/6_comparisons_of_sentiment_analysis_results.ipynb)
 
 **3. deployment**
-- [Code](../deployment/service.py)
-- [BERT model](https://drive.google.com/file/d/1V9NqDJW0goegB9D3HZ0lcEJFiB3X24ai/view?usp=sharing)
+- [Code](./deployment/service.py)
+- [BERT model](https://drive.google.com/file/d/1V9NqDJW0goegB9D3HZ0lcEJFiB3X24ai/view?usp=sharing)  
 This file is stored in google drive as the file size is too big to be pushed to github
-- [HTML Template](../deployment/templates/base.html)
-- [CSS](../deployment/static/style.css)
+- [HTML Template](./deployment/templates/base.html)
+- [CSS](./deployment/static/style.css)
 
 
 ## Data Dictionary
