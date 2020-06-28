@@ -42,7 +42,7 @@ The scope of this project would be to improve user interface and platform experi
 This file is stored in google drive as the file size is too big to be pushed to github
 - [Logistic Regression Model](./data/logreg_3classes.pkl)
 - [Helpful Reviews for accuracy evaluation](./data/helpful_reviews.csv)
-- [Evaluated Helpful Reviews](./data/evaluated_helpful_reviews.csv)
+- [Evaluated Helpful Reviews](https://docs.google.com/spreadsheets/d/1EBsdsXy-MQGXEh5QIjXXAz0igRJZ7dbMMMAaLxCgXtU/edit?usp=sharing)
 
 **2. notebooks**
 - [Data Cleaning and EDA](./notebooks/1_data_cleaning_and_eda.ipynb)
