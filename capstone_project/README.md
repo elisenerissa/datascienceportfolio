@@ -29,7 +29,7 @@ The scope of this project would be to improve user interface and platform experi
 ## Files Directory
 
 **1. Data**
-- [Amazon Cell Phone Data](../data/amazon_cell_v2.csv)
+- [Amazon Cell Phone Data](./data/amazon_cell_v2.csv)
 - [Amazon Reviews](../data/amazon_cell_v2.csv)
 - [Cleaned Data](../data/cleaned_combined_data.csv)
 - [Cleaned Data with an additional keywords columns](../data/cleaned_combined_data_with_keywords.csv)
