@@ -103,11 +103,11 @@ As BERT model outperformed VADER and Logistic Regression, I have deployed BERT m
 
 ## Conclusions and Future steps
 
-To conclude, the BERT model performed relatively well in terms of accuracy score. However, I have found quite a lot of limitations as I was testing the model with many variations of sentences with different sentiments. The limitations are elaborated below.
+To conclude, the BERT model performed relatively well in terms of accuracy score. However, I have found a few limitations as I was testing the model with many variations of sentences with different sentiments. The limitations are elaborated below.
 
 **Limitations #1 (sentiment predictions):**
 
-It is predicting words like "okay" to be 5 star (To me, I would rate it as 3 or 4 star). This could be because many reviewers who think that certain features are "okay" have given a rating of 4 (which is a slightly above average type of rating). As we only fine-tuned the model with 3 classes (negative, neutral, positive), we have categoried 4 star rating to be positive. This explains why the model is giving a 5 star for feature that is described as "okay".
+It is predicting words like "okay" to be 5 star (To me, I would rate it as 3 or 4 star). This could be because many reviewers who think that certain features are "okay" have given a rating of 4 (which is a slightly above average type of rating). As we only fine-tuned the model with 3 classes (negative, neutral, positive), we have categorised 4 star rating to be positive. This explains why the model is giving a 5 star for feature that is described as "okay".
 
 **Solution #1:**
 
@@ -125,7 +125,7 @@ A simple way to improve this is to generate all the synonyms of the features and
 
 Recapping on the business problem and problem statement that we were trying to address:
 
-Business agenda: Improve user interface and platform experience by seggregating reviews into topics or summarising long reviews into just the main points/features and their corresponding sentiments.
+Business agenda: Improve user interface and platform experience by segregating reviews into topics or summarising long reviews into just the main points/features and their corresponding sentiments.
 
 Problem Statement:
 1. Automatically segregates reviews by topics
