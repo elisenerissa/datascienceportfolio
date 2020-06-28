@@ -4,9 +4,11 @@
 
 ## Context
 
-There are billions of text data being generated everyday. Text data, even though, it can be easy to understand for most people (as long as you know the language), **it requires a lot of manpower to analyse a large of volume of text data** that is being generated online on platforms such as Facebook, Instagram, marketplaces such as Amazon, Lazada and Shopee. Hence, it is becoming increasingly important for these companies to analyse these consumers-generated reviews, complains and opinions. Because of these reasons, Natural Language Processing (NLP) has been gaining a lot of attention. With the help of NLP, machines are able to detect keywords and phrases and even sentiments of the phrases.
+There are billions of text data being generated everyday. Text data, even though, it is easy to understand for most people (as long as you know the language), **it requires a lot of manpower to analyse a large of volume of text data** that is being generated online on platforms such as Facebook, Instagram, e-commerce platforms such as Amazon, Lazada and Shopee. Hence, it is becoming increasingly important for these companies to analyse these consumers-generated complains and opinions. Because of these reasons, Natural Language Processing (NLP) has been gaining a lot of attention. With the help of NLP, machines are able to detect keywords and phrases and even sentiments of the phrases.
 
-However, there are still **many challenges in the NLP field. Even though there has been several breakthrough in the recent years, it is still challenging for most NLP techniques to detect sarcasm, negation words and to understand the context of a large chunk of texts.** Hence, this project will attempt to do do reviews mining, mainly to extract important features within a review and also, the sentiment of the feature. **For example, if a reviewer says that "I recently bought this phone. It has a great camera, but the battery life is not so good". We will attempt to extract the sentiment for each feature, namely camera and battery in this context (positive for camera and negative for battery). We will also try to overcome the negation factor as many sentiment analysis techniques such as "VADER" would most likely predict the sentiment towards battery as positive due to the word "good".**
+However, there are still **many challenges in the NLP field. Even though there has been several breakthrough in the recent years, it is still challenging for most NLP techniques to detect sarcasm, negation words and to understand the context of a large chunk of texts.** Hence, this project will attempt to do do reviews mining, mainly to extract important features within a review and also, the sentiment of the feature.
+
+**For example, if a reviewer says that "I recently bought this phone. It has a great camera, but I don't like the screen". We will attempt to extract the sentiment for each feature, namely camera and screen in this context (positive for camera and negative for screen). We will also try to overcome the negation factor as many sentiment analysis techniques such as "VADER" would most likely predict the sentiment towards screen as positive due to the word "like".**
 
 How NLP can impact businesses:
 1. Improve customers experience by learning more about customer's complains
@@ -48,7 +50,7 @@ This file is stored in google drive as the file size is too big to be pushed to 
 - [Topics Analysis and Visualisations](./notebooks/3_topic_analysis_and_visusalizations.ipynb)
 - [Feature Extractions and Sentiment Analysis](./notebooks/4_feature_extractions_and_sentiment_analysis.ipynb)
 - [Fine-tuning of BERT](./notebooks/5_fine_tuning_of_BERT.ipynb)
-- [Findings and Conclusions](./notebooks/6_comparisons_of_sentiment_analysis_results.ipynb)
+- [Findings and Conclusions](./notebooks/6_analysis_and_findings.ipynb)
 
 **3. deployment**
 - [Code](./deployment/service.py)
