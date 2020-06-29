@@ -26,7 +26,7 @@
    <br><br><br>
 
    {% if output['error'] %}
-   <h2>Keyword Error. Please include at least one cellphone feature in your review. eg. camera, battery, etc</h2><br>
+   <h2>No cellphone feature found. Please include at least one cellphone feature in your review. eg. camera, battery, etc</h2><br>
     {% elif output|length > 0 %}
    <h2>Predicted Feature and Sentiment:</h2><br>
      {% for key, value in output.items() %}
