@@ -16,15 +16,18 @@
     </ul>
 
   <div class="container">
-    <p>This tool is able to extract important features from cellphone reviews and predict the sentiment of each feature. Type your own review to try it.</p><br>
+    <p>This tool is able to extract important features from cellphone reviews and predict the sentiment of each feature. Type your own review to try it. <br><br>
+    Remember to include cellphone features like "camera, screen, charger, ringtones,simcards,battery,fingerprint" in your review! "</p><br>
+
     <h1>Type Review here:</h1><br>
     <textarea type="text" name="reviews" rows="20" cols="75"> </textarea>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
    <button id="submit">Submit</button>
    <br><br><br>
 
-
-   {% if output %}
+   {% if output['error'] %}
+   <h2>Keyword Error. Please include at least one cellphone feature in your review. eg. camera, battery, etc</h2><br>
+    {% elif output|length > 0 %}
    <h2>Predicted Feature and Sentiment:</h2><br>
      {% for key, value in output.items() %}
        <button id="predictions"> {{key}}
@@ -38,6 +41,7 @@
        </button>
 
        {% endfor %}
+
    {% endif %}
 
   </div>

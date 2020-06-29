@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, render_template
 import pandas as pd
 import numpy as np
-import nltkmodules
+#import nltkmodules
 from nltk import tokenize
 from transformers import BertForSequenceClassification
 from transformers import BertTokenizer
@@ -137,51 +137,54 @@ def bert_sentiments (summarised_reviews):
 
 def mean_ratings ():
 
-    output = None
+    output = dict()
 
     if request.method == "POST":
         reviews = str(request.form["reviews"])
-
         #find sentences with keywords
         summarised_reviews = sentences_with_keywords (reviews)
-        #predict sentiment with bert
-        feature_ratings = bert_sentiments (summarised_reviews)
-        all_features = {'camera':[],'battery':[],'fingerprint':[],'screen':[],'charger':[],'simcard':[],'ringtones':[]}
-        for feature in feature_ratings:
-            if feature[1]  == 'camera':
-                all_features ['camera'].append(feature[0])
 
-            elif feature[1] =='battery':
-                all_features ['battery'].append(feature[0])
+        if len(summarised_reviews) != 0:
 
-            elif feature[1] == 'fingerprint':
-                all_features ['fingerprint'].append(feature[0])
+            #predict sentiment with bert
+            feature_ratings = bert_sentiments (summarised_reviews)
+            all_features = {'camera':[],'battery':[],'fingerprint':[],'screen':[],'charger':[],'simcard':[],'ringtones':[]}
+            for feature in feature_ratings:
+                if feature[1]  == 'camera':
+                    all_features ['camera'].append(feature[0])
 
-            elif feature[1] == 'fingerprints':
-                all_features ['fingerprint'].append(feature[0])
+                elif feature[1] =='battery':
+                    all_features ['battery'].append(feature[0])
 
-            elif feature[1] == 'screen':
-                all_features ['screen'].append(feature[0])
+                elif feature[1] == 'fingerprint':
+                    all_features ['fingerprint'].append(feature[0])
 
-            elif feature[1]  == 'charger':
-                all_features ['charger'].append(feature[0])
+                elif feature[1] == 'fingerprints':
+                    all_features ['fingerprint'].append(feature[0])
 
-            elif feature[1] == 'touchscreen':
-                all_features ['screen'].append(feature[0])
+                elif feature[1] == 'screen':
+                    all_features ['screen'].append(feature[0])
 
-            elif feature[1] == 'simcard':
-                all_features ['simcard'].append(feature[0])
+                elif feature[1]  == 'charger':
+                    all_features ['charger'].append(feature[0])
 
-            elif feature[1] == 'ringtones':
-                all_features ['ringtones'].append(feature[0])
-        try:
-            #get mean value of ratings if a feature is mentioned more than once with different sentiments eg. in different sentences
-            all_features_mean = {key:np.mean(value) for key,value in all_features.items()}
+                elif feature[1] == 'touchscreen':
+                    all_features ['screen'].append(feature[0])
 
-        except:
-            all_features_mean = {key:np.nan for key,value in all_features.items()}
+                elif feature[1] == 'simcard':
+                    all_features ['simcard'].append(feature[0])
 
-        output = {key:int(val) for key, val in all_features_mean.items() if math.isnan(val)==False}
+                elif feature[1] == 'ringtones':
+                    all_features ['ringtones'].append(feature[0])
+            try:
+                #get mean value of ratings if a feature is mentioned more than once with different sentiments eg. in different sentences
+                all_features_mean = {key:np.mean(value) for key,value in all_features.items()}
 
+            except:
+                all_features_mean = {key:np.nan for key,value in all_features.items()}
+
+            output = {key:int(val) for key, val in all_features_mean.items() if math.isnan(val)==False}
+        else:
+            output = {'error': 'invalid key words'}
 
     return render_template("base.html", output = output)
