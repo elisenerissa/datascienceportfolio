@@ -1,6 +1,10 @@
 # Reviews Mining - Feature Extractions and Sentiment Analysis
 
-I have deployed the feature extraction and sentiment analysis portion of this project [here](http://ec2-3-22-98-206.us-east-2.compute.amazonaws.com:5000/predict-review). - Note that it has not been made mobile-optimised. Also, I may take it down soon due to costs. So if you can't access the link, I may have taken it down. 
+
+
+I have deployed the final model [here](http://ec2-3-22-98-206.us-east-2.compute.amazonaws.com:5000/predict-review). - Note that it has not been made mobile-optimised. Also, I may take it down soon due to costs. So if you can't access the link, I may have taken it down.
+
+
 
 ## Context
 
