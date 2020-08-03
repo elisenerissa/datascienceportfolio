@@ -2,7 +2,7 @@
 # Projects Directory
 
 
-This folder contains the project that I have done during my bootcamp at General Assembly. This README acts as a directory and a short summary of what the project entails. For more information on the scope and problem statement, please click on the folder of each project directly.
+This folder contains the project that I have done during my bootcamp at General Assembly. This README acts as a directory and a short summary of what the project entails. For more information on the scope and problem statement, please click on the links of each project. 
 
 
 
