@@ -28,6 +28,6 @@ threadpoolctl==2.1.0
 tokenizers==0.7.0
 torch==1.5.1
 tqdm==4.46.1
-transformers==2.11.0
+transformers==4.30.0
 urllib3==1.25.9
 Werkzeug==1.0.1
